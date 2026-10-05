@@ -1,0 +1,8 @@
+{
+	"name": "portfolio-infra",
+	"private": true,
+	"scripts": {
+		"dev": "node -e \"console.log('Use npm run dev:docker to start Postgres and Redis.')\"",
+		"dev:docker": "docker compose -f compose.yaml up"
+	}
+}

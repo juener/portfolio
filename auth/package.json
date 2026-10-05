@@ -1,0 +1,15 @@
+{
+	"name": "auth",
+	"private": true,
+	"scripts": {
+		"dev": "node -e \"console.log('Read the ../auth/README.md to see how to run locally.')\"",
+		"dev:docker": "docker compose --project-directory ../infra -f ../infra/compose.dev.yaml up",
+		"dev:local": "concurrently -n nest,next -c yellow,cyan \"npm run dev:nest\" \"npm run dev:next\"",
+		"dev:nest": "npm run start:dev --prefix nestjs",
+		"dev:next": "npm run dev --prefix nextjs"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.5",
+		"concurrently": "^10.0.5"
+	}
+}

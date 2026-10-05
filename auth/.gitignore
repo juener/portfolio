@@ -1,0 +1,9 @@
+node_modules/
+
+# It's a portfolio project, so we need to ignore the env file
+!.env
+!.env.*
+
+.vscode/
+.idea/
+.cursor
