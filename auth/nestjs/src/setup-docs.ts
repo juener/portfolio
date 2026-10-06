@@ -2,6 +2,7 @@ import type { NestFastifyApplication } from '@nestjs/platform-fastify'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { apiReference } from '@scalar/nestjs-api-reference'
 import { cleanupOpenApiDoc } from 'nestjs-zod'
+import { API_PREFIX } from './utils/consts'
 
 const PAGE_TITLE = 'Portfolio - Auth API Documentation'
 
@@ -14,14 +15,14 @@ export function setupDocs(app: NestFastifyApplication) {
 	)
 
 	const fastify = app.getHttpAdapter().getInstance()
-	const openApiPath = `/openapi.json`
+	const openApiPath = `/${API_PREFIX}/openapi.json`
 
 	fastify.get(openApiPath, (_request, reply) => {
 		reply.send(openApiDocument)
 	})
 
 	app.use(
-		`/docs`,
+		`/${API_PREFIX}/docs`,
 		apiReference({
 			withFastify: true,
 			url: openApiPath,

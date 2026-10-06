@@ -5,8 +5,10 @@ on:
     branches:
       - main
     paths:
-      - 'auth/**'
-      - '!auth/nextjs/**'
+      - 'auth/nestjs/**'
+      - 'auth/compose.prod.yaml'
+      - 'auth/package.json'
+      - 'auth/package-lock.json'
       - '.github/workflows/auth-deploy.yml'
   workflow_dispatch:
 

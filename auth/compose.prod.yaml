@@ -9,7 +9,7 @@ services:
     restart: always
     env_file: .env
     healthcheck:
-      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:4000/.well-known/jwks.json').then(r => process.exit(r.ok ? 0 : 1))"]
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:4000/portfolio/auth/.well-known/jwks.json').then(r => process.exit(r.ok ? 0 : 1))"]
       interval: 15s
       start_period: 30s
     networks:

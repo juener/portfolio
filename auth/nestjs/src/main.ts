@@ -4,11 +4,12 @@ import { FastifyAdapter, type NestFastifyApplication } from '@nestjs/platform-fa
 import { AppModule } from './app.module'
 import { env } from './env'
 import { setupDocs } from './setup-docs'
+import { API_PREFIX } from './utils/consts'
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter())
 	await app.register(cookie)
-	// app.setGlobalPrefix(API_PREFIX)
+	app.setGlobalPrefix(API_PREFIX)
 	setupDocs(app)
 	await app.listen({ port: env.NEST_PORT, host: '0.0.0.0' })
 }
