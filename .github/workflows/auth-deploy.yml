@@ -94,6 +94,6 @@ jobs:
             docker compose -f compose.prod.yaml pull </dev/null
             docker logout ghcr.io
 
-            docker compose -f compose.prod.yaml run --rm -T auth npx prisma migrate deploy </dev/null
+            docker compose -f compose.prod.yaml run --rm -T portfolio-auth-nestjs-prod npx prisma migrate deploy </dev/null
             docker compose -f compose.prod.yaml up -d --force-recreate --wait </dev/null
             docker compose -f compose.prod.yaml ps </dev/null

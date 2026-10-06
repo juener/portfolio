@@ -1,0 +1,46 @@
+name: Deploy Infra to VPS
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'infra/**'
+      - '.github/workflows/infra-deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: HOSTINGER_VPS
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy compose file
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: infra/compose.yaml
+          target: /home/_/com.vallete/portfolio-prod/infra
+          strip_components: 1
+
+      - name: Deploy
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script_stop: true
+          script: |
+            cd /home/_/com.vallete/portfolio-prod/infra
+
+            docker network create shared-network 2>/dev/null || true
+            docker compose -f compose.yaml pull </dev/null
+            docker compose -f compose.yaml up -d --wait </dev/null
+            docker compose -f compose.yaml ps </dev/null
