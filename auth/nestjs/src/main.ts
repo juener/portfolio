@@ -10,6 +10,6 @@ async function bootstrap() {
 	await app.register(cookie)
 	// app.setGlobalPrefix(API_PREFIX)
 	setupDocs(app)
-	await app.listen(env.NEST_PORT)
+	await app.listen({ port: env.NEST_PORT, host: '0.0.0.0' })
 }
 bootstrap()

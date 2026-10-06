@@ -1,0 +1,22 @@
+# used by /.github/workflows/auth-deploy.yml only
+
+name: portfolio-auth-prod
+
+services:
+  portfolio-auth-nestjs-prod:
+    image: ${AUTH_IMAGE}
+    container_name: portfolio-auth-nestjs-prod
+    restart: always
+    env_file: .env
+    healthcheck:
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:4000/.well-known/jwks.json').then(r => process.exit(r.ok ? 0 : 1))"]
+      interval: 15s
+      start_period: 30s
+    networks:
+      - shared-network
+    labels:
+      - traefik.enable=false
+
+networks:
+  shared-network:
+    external: true

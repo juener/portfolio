@@ -1,7 +1,7 @@
 name: portfolio-infra-${ENV}
 
 services:
-  portfolio-postgres:
+  portfolio-infra-postgres:
     image: postgres:17.6
     container_name: portfolio-infra-postgres-${ENV}
     restart: unless-stopped
@@ -26,7 +26,7 @@ services:
     networks:
       - shared-network
 
-  portfolio-redis:
+  portfolio-infra-redis:
     image: redis:7.4-alpine
     container_name: portfolio-infra-redis-${ENV}
     restart: unless-stopped

@@ -1,5 +1,5 @@
-import { createZodDto } from "nestjs-zod";
-import { z } from "zod";
+import { createZodDto } from 'nestjs-zod'
+import { z } from 'zod'
 
 export const publicUserSchema = z
 	.object({
@@ -8,6 +8,6 @@ export const publicUserSchema = z
 		email: z.email(),
 		avatarUrl: z.string(),
 	})
-	.strict();
+	.strict()
 
 export class PublicUserDto extends createZodDto(publicUserSchema) {}
